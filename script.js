@@ -202,7 +202,7 @@
     whoami: () => '01x — Élève ingénieur, Cybersecurity × AI, ENSA Béni Mellal.',
     skills: () => 'SOC • Threat Hunting • Wazuh • Web Pentest • DFIR • Python • ML • LLM/RAG',
     projects: () => 'SOC Agentique | AI Malware Analysis (conception) | Wazuh Lab | OCR | Infrastructure | Anomalies GPS',
-    ctf: () => 'CSIA CTF 2026 : 1er individuel / 2e équipe. Black Hat MEA 2026 : qualification. AUSIM Cyberdrill : finaliste.',
+    ctf: () => 'CSIA CTF 2026 : organisateur de la compétition. Black Hat MEA 2026 : qualification. AUSIM Cyberdrill : finaliste.',
     contact: () => 'LinkedIn: https://www.linkedin.com/in/othmane-karim/ | GitHub: https://github.com/Galdro-0',
     github: () => 'https://github.com/Galdro-0',
     clear: () => { output.replaceChildren(); return null; }
