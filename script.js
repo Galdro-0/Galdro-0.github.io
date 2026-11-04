@@ -10,7 +10,7 @@
   const mobileNav = $('#mobileNav');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Reveal the alias after the original name; respect reduced motion.
+  // Hold the original name visibly before revealing the alias in every mode.
   const identityMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const identityIntro = $('.name-intro');
   const identityAlias = $('.name-alias');
@@ -18,17 +18,17 @@
   const identityLast = $('#identityLast');
   const originalIdentity = [identityFirst.textContent, identityLast.textContent];
   let identityTimer;
+  let identityReady = false;
+  let identityFinished = false;
   const finishIdentity = () => {
     window.clearTimeout(identityTimer);
     identityIntro.hidden = true;
     identityAlias.hidden = false;
+    identityFinished = true;
   };
   const playIdentity = () => {
     window.clearTimeout(identityTimer);
-    if (identityMotion.matches) {
-      finishIdentity();
-      return;
-    }
+    if (!identityReady || identityFinished || document.hidden) return;
     identityFirst.textContent = originalIdentity[0];
     identityLast.textContent = originalIdentity[1];
     identityIntro.hidden = false;
@@ -43,12 +43,21 @@
       if (!identityFirst.textContent && !identityLast.textContent) finishIdentity();
       else identityTimer = window.setTimeout(eraseNext, 55);
     };
-    identityTimer = window.setTimeout(eraseNext, 1500);
+    identityTimer = window.setTimeout(eraseNext, 2500);
   };
-  identityMotion.addEventListener('change', () => {
-    if (identityMotion.matches) finishIdentity();
+  // Background tabs must not consume the time reserved for reading the name.
+  document.addEventListener('visibilitychange', () => {
+    if (identityFinished) return;
+    if (document.hidden) window.clearTimeout(identityTimer);
+    else playIdentity();
   });
-  playIdentity();
+  Promise.race([
+    document.fonts ? document.fonts.ready : Promise.resolve(),
+    new Promise(resolve => window.setTimeout(resolve, 1500))
+  ]).then(() => {
+    identityReady = true;
+    playIdentity();
+  });
 
   const setMenu = (open) => {
     navToggle.setAttribute('aria-expanded', String(open));
