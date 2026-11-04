@@ -173,52 +173,8 @@
   }));
   projectClose.addEventListener('click', () => projectDialog.close());
 
-  // Local, purely decorative interactive terminal: does not execute shell commands.
-  const terminal = $('#commandDialog');
-  const output = $('#terminalOutput');
-  const terminalInput = $('#terminalInput');
-  const openTerminal = () => {
-    if (!terminal.open) terminal.showModal();
-    terminalInput.focus();
-  };
-  $('#commandTrigger').addEventListener('click', openTerminal);
-  $('#commandClose').addEventListener('click', () => terminal.close());
-  window.addEventListener('keydown', event => {
-    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
-      event.preventDefault();
-      openTerminal();
-    }
-  });
-  // Click on the backdrop, outside the dialog content, to close.
-  [terminal, projectDialog].forEach(dialog => dialog.addEventListener('click', event => {
-    if (event.target === dialog) dialog.close();
-  }));
-  const addOutput = (text, className = '') => {
-    const line = document.createElement('p');
-    line.textContent = text;
-    if (className) line.className = className;
-    output.appendChild(line);
-    output.scrollTop = output.scrollHeight;
-  };
-  const commands = {
-    help: () => 'Commandes : help | whoami | skills | projects | ctf | contact | github | clear',
-    whoami: () => '01x — Élève ingénieur, Cybersecurity × AI, ENSA Béni Mellal.',
-    skills: () => 'SOC • Threat Hunting • Wazuh • Web Pentest • DFIR • Python • ML • LLM/RAG',
-    projects: () => 'SOC Agentique | AI Malware Analysis (conception) | Wazuh Lab | OCR | Infrastructure | Anomalies GPS',
-    ctf: () => 'CSIA CTF 2026 : organisateur de la compétition. Black Hat MEA 2026 : qualification. AUSIM Cyberdrill : finaliste.',
-    contact: () => 'LinkedIn: https://www.linkedin.com/in/othmane-karim/ | GitHub: https://github.com/Galdro-0',
-    github: () => 'https://github.com/Galdro-0',
-    clear: () => { output.replaceChildren(); return null; }
-  };
-  $('#terminalForm').addEventListener('submit', event => {
-    event.preventDefault();
-    const command = terminalInput.value.trim().toLowerCase();
-    terminalInput.value = '';
-    if (!command) return;
-    addOutput('visitor@portfolio:~$ ' + command, 'term-green');
-    if (Object.prototype.hasOwnProperty.call(commands, command)) {
-      const result = commands[command]();
-      if (result) addOutput(result);
-    } else addOutput('Commande inconnue : ' + command + '. Essayez « help ».');
+  // Close the project details when clicking outside its content.
+  projectDialog.addEventListener('click', event => {
+    if (event.target === projectDialog) projectDialog.close();
   });
 })();
