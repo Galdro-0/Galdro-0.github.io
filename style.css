@@ -38,3 +38,26 @@
 /* Keep decorative light inside the viewport to prevent horizontal scroll. */
 .ambient-red{right:0}
 .ambient-blue{width:min(640px,100vw)}
+
+/* Reserve the title height while the name becomes the alias. */
+.hero h1{min-height:2em;display:flex;align-items:center}
+.name-intro .hero-name-first,.name-intro .hero-name-last{display:block}
+.hero h1 .name-alias{font-size:1.55em;line-height:1;letter-spacing:-.08em;color:var(--white);animation:alias-arrive .45s ease-out both}
+.name-alias>span:not(.cursor){color:var(--red);text-shadow:0 0 45px rgba(255,31,79,.3)}
+.identity-replay{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid var(--line);border-radius:5px;padding:5px 9px;color:#99b8cf;font:500 10px var(--mono);margin:0 0 18px;transition:color .2s,border-color .2s}
+.identity-replay:hover{color:var(--white);border-color:var(--blue)}
+.identity-replay:disabled{opacity:.5;cursor:wait}
+.identity-replay[hidden]{display:inline-flex!important;visibility:hidden}
+@keyframes alias-arrive{from{opacity:0;transform:translateY(8px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){.hero h1 .name-alias{animation:none}}
+
+/* Improve supporting text and touch/keyboard controls across the theme. */
+:root{--muted:#8da3b9}
+.skill-panel p,.project-body>p,.timeline-item>p:last-child{font-size:14px;line-height:1.85}
+.tag-list span,.project-tags span{font-size:11px}
+.project-footnote{font-size:11px;line-height:1.8;align-items:flex-start}
+.dialog-close,.menu-toggle{width:44px;height:44px}
+.filter-btn,.project-more{min-height:44px}
+.terminal-input-row:focus-within{box-shadow:inset 3px 0 var(--blue);background:#0b2030}
+.terminal-input-row input:focus-visible{outline:1px solid var(--blue)!important;outline-offset:4px}
+@media(max-width:540px){.about-text p,.contact-copy>p:not(.section-index){font-size:14px}.filter-btn{font-size:11px}.achievement p{font-size:12px}.hero-social{font-size:12px}}
