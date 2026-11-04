@@ -5,7 +5,6 @@ Portfolio personnel en HTML, CSS et JavaScript, publié sur https://galdro-0.git
 ## Identité et animation
 
 L’accueil affiche d’abord **Othmane Karim**, puis efface ce nom pour révéler **01x**.
-Le bouton « Rejouer l’animation » permet de relancer cette transition.
 Avec la réduction des animations activée ou sans JavaScript, **01x** apparaît directement.
 Les titres, métadonnées, marques, textes accessibles et terminal utilisent **01x**.
 Les adresses GitHub, LinkedIn et email existantes sont conservées.

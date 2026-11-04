@@ -44,10 +44,6 @@
 .name-intro .hero-name-first,.name-intro .hero-name-last{display:block}
 .hero h1 .name-alias{font-size:1.55em;line-height:1;letter-spacing:-.08em;color:var(--white);animation:alias-arrive .45s ease-out both}
 .name-alias>span:not(.cursor){color:var(--red);text-shadow:0 0 45px rgba(255,31,79,.3)}
-.identity-replay{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1px solid var(--line);border-radius:5px;padding:5px 9px;color:#99b8cf;font:500 10px var(--mono);margin:0 0 18px;transition:color .2s,border-color .2s}
-.identity-replay:hover{color:var(--white);border-color:var(--blue)}
-.identity-replay:disabled{opacity:.5;cursor:wait}
-.identity-replay[hidden]{display:inline-flex!important;visibility:hidden}
 @keyframes alias-arrive{from{opacity:0;transform:translateY(8px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
 @media(prefers-reduced-motion:reduce){.hero h1 .name-alias{animation:none}}
 

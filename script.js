@@ -16,15 +16,12 @@
   const identityAlias = $('.name-alias');
   const identityFirst = $('#identityFirst');
   const identityLast = $('#identityLast');
-  const identityReplay = $('#identityReplay');
   const originalIdentity = [identityFirst.textContent, identityLast.textContent];
   let identityTimer;
   const finishIdentity = () => {
     window.clearTimeout(identityTimer);
     identityIntro.hidden = true;
     identityAlias.hidden = false;
-    identityReplay.disabled = false;
-    identityReplay.hidden = identityMotion.matches;
   };
   const playIdentity = () => {
     window.clearTimeout(identityTimer);
@@ -36,7 +33,6 @@
     identityLast.textContent = originalIdentity[1];
     identityIntro.hidden = false;
     identityAlias.hidden = true;
-    identityReplay.disabled = true;
     const eraseNext = () => {
       if (identityMotion.matches) {
         finishIdentity();
@@ -49,10 +45,8 @@
     };
     identityTimer = window.setTimeout(eraseNext, 1500);
   };
-  identityReplay.addEventListener('click', playIdentity);
   identityMotion.addEventListener('change', () => {
     if (identityMotion.matches) finishIdentity();
-    else identityReplay.hidden = false;
   });
   playIdentity();
 
